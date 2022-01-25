@@ -287,6 +287,10 @@ nav li:last-child a:hover {
   background: #b23301;
 }
 
+.logo {
+  z-index: 100;
+}
+
 nav li a {
   transition: all 0.3s ease-in-out;
 }
@@ -476,14 +480,18 @@ section.stauts {
   display: none;
 }
 
+.pore {
+  position: relative;
+}
+
 @media (max-width: 500px) {
   .navbarr {
     position: absolute;
     top: -450px;
-    right: 0;
+    right: -18px;
     flex-direction: column;
     background: #FE5F1E;
-    width: 200px;
+    width: 100vw;
     z-index: 1;
     padding: 80px 20px 20px;
     transition: all 0.3s ease-in-out;
@@ -523,5 +531,5 @@ section.stauts {
 }
 footer {
   background: #ffab6f;
-  margin-top: 20px;
+  margin-top: 50vh;
 }

@@ -12,6 +12,9 @@ nav li:last-child a{
         background: $primary-hover;
     }
 }
+.logo{
+    z-index: 100;
+}
 nav li a{
     transition: $smooth;
     &:hover{
@@ -209,16 +212,18 @@ section.stauts{
 .menu-close{
     display: none;
 }
-
+.pore{
+    position: relative;
+}
 
 @media(max-width:500px){
     .navbarr{
         position: absolute;
         top: -450px;
-        right: 0;
+        right: -18px;
         flex-direction: column;
         background: $primary;
-        width: 200px;
+        width: 100vw;
         z-index: 1;
         padding: 80px 20px 20px;
         transition: $smooth;
@@ -255,5 +260,5 @@ section.stauts{
 // footer 
 footer{
     background: rgb(255, 171, 111);
-    margin-top: 20px;
+    margin-top: 50vh;
 }
