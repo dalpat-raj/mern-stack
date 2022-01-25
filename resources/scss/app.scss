@@ -235,15 +235,25 @@ section.stauts{
     nav li{
         padding: 20px 0;
     }
-    // .navbarr.show{
-    //     background: $primary;
-    //     width: 200px;
-    //     flex-direction: column;
-    //     position: absolute;
-    //     top: 0;
-    //     right: 0;
-    //     z-index: 1;
-    //     padding: 80px 20px 20px;
-    // }
+    .herroo{
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        padding-top: 10px;
+    }
+    .images{
+        width: 80%;
+    }
+    .sizee{
+        font-size: 12px;
+    }
+
 }
 
+// footer 
+footer{
+    background: rgb(255, 171, 111);
+    margin-top: 20px;
+}

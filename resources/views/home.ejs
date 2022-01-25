@@ -1,14 +1,14 @@
 
 
     <!-- hero section  -->
-    <section class="hero ">
-        <div class="container mx-auto flex items-center justify-between ">
+    <section class="hero">
+        <div class="container mx-auto md:flex items-center justify-between herroo">
             <div class="w-1/2">
                 <h6 class="text-lg"><em>"Keep calm and order pizza."</em></h6>
                 <h1 class="text-3xl md:text-6xl font-bold">Don't wait !</h1>
                 <button class="px-6 py-2 rounded-full text-white font-bold mt-4 btn-primary">Order Now</button>
             </div>
-            <div class="w-1/2">
+            <div class="w-1/2 images">
                 <img src="/img/hero-pizza.png" alt="pizza">
             </div>
         </div>
@@ -17,18 +17,18 @@
     <!-- menu section  -->
     <section class="menu container mx-auto py-8">
         <h1 class="text-xl font-bold mb-8">All Pizzas</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-12 gap-y-16">
+        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:gap-x-12 gap-x-4 md:gap-y-16 gap-y-8">
             <% pizzas.forEach(function(pizza) { %>
                 <div>
-                    <img class="h-40 mb-4 mx-auto" src="/img/<%= pizza.image %>" alt="">
+                    <img class="md:h-40 mb-1 md:mb-4 mx-auto" src="/img/<%= pizza.image %>" alt="">
                     <div class="text-center">
-                        <h2 class="mb-4 text-lg"><%= pizza.name%></h2>
-                        <span class="sizee py-1 px-4 rounded-full uppercase text-xs"><%= pizza.size%></span>
+                        <h2 class="mb-1 md:mb-4 md:text-lg text-sm"><%= pizza.name%></h2>
+                        <span class="sizee py-0.5 px-2 md:py-1 md:px-4 rounded-full uppercase text-sm md:text-xs"><%= pizza.size%></span>
                         <div class="flex items-center justify-around mt-6">
-                            <span class="font-bold text-lg ">₹ <%= pizza.price%></span>
-                            <button data-pizza="<%= JSON.stringify(pizza)%>" class="add-to-cart py-1 px-6 rounded-full flex items-center">
+                            <span class="font-bold md:text-lg  text-sm">₹ <%= pizza.price%></span>
+                            <button data-pizza="<%= JSON.stringify(pizza)%>" class="add-to-cart py-0.5 md:py-1 md:px-6 px-2 rounded-full flex items-center">
                                 <span>+</span>
-                                <span class="ml-4">Add</span>
+                                <span class="md:ml-4 ml-2">Add</span>
                             </button>
                         </div>
                     </div>

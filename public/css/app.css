@@ -503,4 +503,25 @@ section.stauts {
   nav li {
     padding: 20px 0;
   }
+
+  .herroo {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+  }
+
+  .images {
+    width: 80%;
+  }
+
+  .sizee {
+    font-size: 12px;
+  }
+}
+footer {
+  background: #ffab6f;
+  margin-top: 20px;
 }
