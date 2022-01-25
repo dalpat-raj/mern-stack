@@ -1,0 +1,34 @@
+<section class="login flex justify-center ">
+        <div class="w-1/4 space-y-8">
+          <form  action="/login" method="POST" class="mt-8 space-y-6 border border-gray-400 px-6 py-6">
+            <% if(messages.error) { %>
+            <span class="text-red-500 text-sm"><%= messages.error %></span>
+            <% } %>
+            <div class="rounded-md shadow-sm -space-y-px">
+              <div >
+                <label for="email-address">Email address</label>
+                <input id="email-address" name="email" type="email" autocomplete="email" required class="mb-8 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+              </div>
+              <div>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
+              </div>
+              <a class="font-medium text-indigo-600 hover:text-indigo-500">please choose a account</a>
+            </div>
+      
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <button type="submit"  class="inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-2" >Log in</button type="submit">
+              </div>
+      
+              <div class="text-sm">
+                <a href="/register">
+                  Don't have account ?
+                </a>
+              </div>
+            </div>
+            <div> 
+            </div>
+          </form>
+        </div>
+</section>
