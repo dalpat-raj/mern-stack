@@ -512,6 +512,13 @@ section.stauts {
     padding: 20px 0;
   }
 
+  nav li a {
+    color: #fff;
+  }
+  nav li a:hover {
+    color: #b23301;
+  }
+
   .herroo {
     width: 100%;
     margin: auto;
@@ -531,5 +538,5 @@ section.stauts {
 }
 footer {
   background: #ffab6f;
-  margin-top: 50vh;
+  margin-top: 10vh;
 }

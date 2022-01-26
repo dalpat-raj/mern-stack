@@ -240,6 +240,12 @@ section.stauts{
     nav li{
         padding: 20px 0;
     }
+    nav li a{
+        color: $pure;
+        &:hover{
+            color: $primary-hover;
+        }
+    }
     .herroo{
         width: 100%;
         margin: auto;
@@ -260,5 +266,5 @@ section.stauts{
 // footer 
 footer{
     background: rgb(255, 171, 111);
-    margin-top: 50vh;
+    margin-top: 10vh;
 }
