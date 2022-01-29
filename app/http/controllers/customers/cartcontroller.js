@@ -1,4 +1,7 @@
+
+
 function cartController() {
+
     return {
         index(req, res) {
             res.render('customers/cart')
@@ -18,18 +21,36 @@ function cartController() {
                   cart.items[req.body._id] = {
                       item: req.body,
                       qty: 1
-                  }
-                  cart.totalQty = cart.totalQty + 1;
-                  cart.totalPrice = cart.totalPrice + req.body.price     
-            }else{
-                cart.items[req.body._id].qty = cart.items[req.body._id].qty + 1
-                cart.totalQty = cart.totalQty + 1
-                cart.totalPrice = cart.totalPrice + req.body.price
-            }
-            return res.json({totalQty: req.session.cart.totalQty })  //res.session.cart.totalQty
-        }
+                    }
+                    cart.totalQty = cart.totalQty + 1;
+                    cart.totalPrice = cart.totalPrice + req.body.price     
+                }else if(cart.items[req.body._id].qty < 10){
+                    cart.items[req.body._id].qty = cart.items[req.body._id].qty + 1
+                    cart.totalQty = cart.totalQty + 1
+                    cart.totalPrice = cart.totalPrice + req.body.price
+                }
+           
+                return res.json({totalQty: req.session.cart.totalQty, Qty: req.session.cart.items[req.body._id].qty, totalPrice: req.session.cart.totalPrice, price: req.body.price })
+       
+        },
+        minusupdate(req, res){
+            let cart = req.session.cart  
+                if(cart.items[req.body._id].qty > 1){
+                    cart.items[req.body._id].qty = cart.items[req.body._id].qty - 1
+                    cart.totalQty = cart.totalQty - 1
+                    cart.totalPrice = cart.totalPrice - req.body.price
+           
+                return res.json({totalQty: req.session.cart.totalQty, Qty: req.session.cart.items[req.body._id].qty, totalPrice: req.session.cart.totalPrice, price: req.body.price })
+                }else{
+                    console.log('minimum 1 quantity');
+                }
+        },
+     
+      
     }
 }
 
 
 module.exports = cartController
+
+

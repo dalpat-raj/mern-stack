@@ -13,8 +13,8 @@ const passport = require('passport')
 const Emitter = require('events')
 
 // database connection 
-// const url = 'mongodb://localhost/pizza';   // local mongodb compass
-const url = process.env.MY_URL
+const url = 'mongodb://localhost/pizza';   // local mongodb compass
+// const url = process.env.MY_URL
 mongoose.connect(url).then(()=>{
     console.log('DataBase Connection succesfull');
 }).catch((err)=>{
@@ -37,6 +37,7 @@ app.use(
         secret: process.env.COOKIE_SECRET,
         resave: false,
         store: store,
+        unset: 'destroy',
         saveUninitialized: false,
         cookie: { maxAge: 1000 * 60 * 60 * 24 }
     })

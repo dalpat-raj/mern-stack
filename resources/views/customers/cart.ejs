@@ -14,9 +14,13 @@
                     <h1><%= pizza.item.name %></h1>
                     <span><%= pizza.item.size %></span>
                 </div>
-                <span class="flex-1"><%= pizza.qty %> pcs</span>
-             <!-- <a id="remove-qty" class="mr-20 btn-primary px-3 py-1 rounded-full text-white font-bold">remove</a> -->
-                <span class="font-bold text-lg">₹ <%= pizza.item.price * pizza.qty %></span>
+                <span class="flex-1">
+                <button data-pizza="<%= JSON.stringify(pizza)%>" class="cartminus px-3 py-1 rounded-full  font-bold"><i class="far fa-minus-square"></i></button>
+                <span id="pices" data-id="<%= pizza.item._id %>" ><%= pizza.qty %></span>
+                <button data-pizza="<%= JSON.stringify(pizza)%>" class="carthide px-3 py-1 rounded-full  font-bold"><i class="far fa-plus-square"></i></button>
+                </span>
+                <button data-pizza="<%= JSON.stringify(pizza)%>" class="cartremove px-3 py-1 rounded-full mr-20 font-bold"><i class="far fa-window-close"></i></button>
+                <span id="price" data-id="<%= pizza.item._id %>" class="font-bold text-lg">₹ <%= pizza.item.price * pizza.qty %></span>
             </div>
             <% } %>
 
@@ -25,7 +29,7 @@
         <div class="text-right py-4">
             <div>
                 <span class="text-lg font-bold">Total Amount:</span>
-                <span class="amount text-2xl font-bold ml-2">₹ <%= session.cart.totalPrice %></span>
+                <span id="totalamount" class="amount text-2xl font-bold ml-2">₹ <%= session.cart.totalPrice %></span>
             </div>
             <% if(user) { %>
             <div>
