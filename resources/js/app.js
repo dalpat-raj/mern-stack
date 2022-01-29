@@ -43,17 +43,17 @@ function plusqty(pizza){
         // console.log(res);
         let dataid = JSON.parse(res.config.data)
         pices.forEach((showw)=>{
-            if(dataid._id == showw.dataset.id){
-                showw.innerText = `${res.data.Qty}`
-                totalamount.innerText = `₹ ${res.data.totalPrice}`
-            } 
-        })
+        if(dataid._id == showw.dataset.id){
+        showw.innerText = `${res.data.Qty}`
+        totalamount.innerText = `₹ ${res.data.totalPrice}`
+    } 
+})
     
-        price.forEach((price)=>{
-            if(dataid._id == price.dataset.id){
-                price.innerText = `₹ ${res.data.price * res.data.Qty}` 
-            }
-        })
+price.forEach((price)=>{
+    if(dataid._id == price.dataset.id){
+        price.innerText = `₹ ${res.data.price * res.data.Qty}` 
+    }
+})
 
 
         

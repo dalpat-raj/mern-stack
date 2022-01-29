@@ -19,7 +19,7 @@
                 <span id="pices" data-id="<%= pizza.item._id %>" ><%= pizza.qty %></span>
                 <button data-pizza="<%= JSON.stringify(pizza)%>" class="carthide px-3 py-1 rounded-full  font-bold"><i class="far fa-plus-square"></i></button>
                 </span>
-                <button data-pizza="<%= JSON.stringify(pizza)%>" class="cartremove px-3 py-1 rounded-full mr-20 font-bold"><i class="far fa-window-close"></i></button>
+                <!-- <button data-pizza="<%= JSON.stringify(pizza)%>" class="cartremove px-3 py-1 rounded-full mr-20 font-bold"><i class="far fa-window-close"></i></button> -->
                 <span id="price" data-id="<%= pizza.item._id %>" class="font-bold text-lg">₹ <%= pizza.item.price * pizza.qty %></span>
             </div>
             <% } %>
