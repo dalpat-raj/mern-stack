@@ -4,19 +4,18 @@
 
 
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
     font-family: 'lato', sans-serif;
     color: $dark;  
     display: flex; 
     flex-direction: column;
-    height: 100%;
+    height: 100vh;
 }
 // footer 
 
 .footer{
     background: rgb(255, 171, 111);
+    width: 100%;
+    height: 15vh;
     margin-top: auto;
 }
 .cartcount{
@@ -76,7 +75,7 @@ section.cart{
 // login 
 section.login{
     background: $secondary;
-    // min-height: calc(100vh - 86px);
+    min-height: calc(100vh - 86px);
     a{
         color: $primary;
         &:hover{
