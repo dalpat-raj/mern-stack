@@ -13,8 +13,8 @@ const passport = require('passport')
 const Emitter = require('events')
 
 // database connection 
-const url = 'mongodb://localhost/pizza';   // local mongodb compass
-// const url = process.env.MY_URL
+// const url = 'mongodb://localhost/pizza';   // local mongodb compass
+const url = process.env.MY_URL
 mongoose.connect(url).then(()=>{
     console.log('DataBase Connection succesfull');
 }).catch((err)=>{
