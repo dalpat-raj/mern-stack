@@ -2311,6 +2311,87 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./resources/js/Quantity.js":
+/*!**********************************!*\
+  !*** ./resources/js/Quantity.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "quantityPm": () => (/* binding */ quantityPm)
+/* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+var pices = document.querySelectorAll('#pices');
+var totalamount = document.querySelector('#totalamount');
+var price = document.querySelectorAll('#price');
+
+function quantityPm() {
+  //  quantity increase function
+  function plusqty(pizza) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post("/cart/add/".concat(pizza.title), pizza).then(function (res) {
+      var dataid = JSON.parse(res.config.data);
+      pices.forEach(function (showw) {
+        if (dataid.title == showw.dataset.id) {
+          showw.innerText = "".concat(res.data.itemQty);
+          totalamount.innerText = "\u20B9 ".concat(res.data.totalPrice);
+        }
+      });
+      price.forEach(function (price) {
+        if (dataid.title == price.dataset.id) {
+          price.innerText = "\u20B9 ".concat(res.data.itemPrice);
+        }
+      });
+    })["catch"](function (err) {
+      console.log('rong');
+    });
+  } //  quantity increase button
+
+
+  var carthide = document.querySelectorAll('.carthide');
+  carthide.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      var pizza = JSON.parse(btn.dataset.pizza);
+      plusqty(pizza);
+    });
+  }); // decrese function
+
+  function minusqty(pizza) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post("/cart/minus/".concat(pizza.title), pizza).then(function (res) {
+      var dataid = JSON.parse(res.config.data);
+      pices.forEach(function (showw) {
+        if (dataid.title == showw.dataset.id) {
+          showw.innerText = "".concat(res.data.item_Qty);
+          totalamount.innerText = "\u20B9 ".concat(res.data.totalpp);
+        }
+      });
+      price.forEach(function (price) {
+        if (dataid.title == price.dataset.id) {
+          price.innerText = "\u20B9 ".concat(res.data.item_Price);
+        }
+      });
+    })["catch"](function (err) {
+      console.log('rong');
+    });
+  } // quantity minus button
+
+
+  var cartminus = document.querySelectorAll('.cartminus');
+  cartminus.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      var pizza = JSON.parse(btn.dataset.pizza);
+      minusqty(pizza);
+    });
+  });
+}
+
+
+
+/***/ }),
+
 /***/ "./resources/js/admin.js":
 /*!*******************************!*\
   !*** ./resources/js/admin.js ***!
@@ -2446,7 +2527,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _stripe__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./stripe */ "./resources/js/stripe.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _stripe_stripe_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @stripe/stripe-js */ "./node_modules/@stripe/stripe-js/dist/stripe.esm.js");
+/* harmony import */ var _Quantity__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Quantity */ "./resources/js/Quantity.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -2461,9 +2542,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var addToCart = document.querySelectorAll('.add-to-cart');
 var cartCounter = document.querySelector('#cartCounter');
-var pices = document.querySelectorAll('#pices');
-var totalamount = document.querySelector('#totalamount');
-var price = document.querySelectorAll('#price');
 
 function updateCart(pizza) {
   axios__WEBPACK_IMPORTED_MODULE_0___default().post("/cart/add/".concat(pizza.slug), pizza).then(function (res) {
@@ -2573,65 +2651,9 @@ menuclose.addEventListener('click', function () {
   navbarr.style.top = "-450px";
   menuclose.style.display = 'none';
   humbger.style.display = 'block';
-}); // //  quantity increase function
-// function plusqty(pizza){
-//     axios.post('/updatecart', pizza).then(function (res){
-//         cartCounter.innerText = res.data.totalQty
-//         // console.log(res);
-//         let dataid = JSON.parse(res.config.data)
-//         pices.forEach((showw)=>{
-//         if(dataid._id == showw.dataset.id){
-//         showw.innerText = `${res.data.Qty}`
-//         totalamount.innerText = `₹ ${res.data.totalPrice}`
-//     } 
-// })
-// price.forEach((price)=>{
-//     if(dataid._id == price.dataset.id){
-//         price.innerText = `₹ ${res.data.price * res.data.Qty}` 
-//     }
-// })
-//     }).catch(function (err){
-//      console.log('rong');
-//     })
-// }
-// //  quantity increase button
-// const carthide = document.querySelectorAll('.carthide')
-// carthide.forEach((btn)=>{
-//     btn.addEventListener('click', (e)=>{
-//         let pizza = JSON.parse(btn.dataset.pizza)
-//         pizza = pizza.item
-//         plusqty(pizza);
-//     })
-// })
-// function minusqty(pizza){
-//     axios.post('/minusqty', pizza).then(function (res){
-//         cartCounter.innerText = res.data.totalQty
-//         // console.log(res);
-//         let dataid = JSON.parse(res.config.data)
-//         pices.forEach((showw)=>{
-//             if(dataid._id == showw.dataset.id){
-//                 showw.innerText = `${res.data.Qty}`
-//                 totalamount.innerText = `₹ ${res.data.totalPrice}`
-//             } 
-//         })
-//         price.forEach((price)=>{
-//             if(dataid._id == price.dataset.id){
-//                 price.innerText = `₹ ${res.data.price * res.data.Qty}` 
-//             }
-//         })
-//     }).catch(function (err){
-//      console.log('rong');
-//     }) 
-// }
-// // quantity minus button
-// const cartminus = document.querySelectorAll('.cartminus')
-// cartminus.forEach((btn)=>{
-//     btn.addEventListener('click', (e)=>{
-//         let pizza = JSON.parse(btn.dataset.pizza)
-//         pizza = pizza.item
-//         minusqty(pizza);
-//     })
-// })
+}); // Quantity increase and decrease 
+
+(0,_Quantity__WEBPACK_IMPORTED_MODULE_5__.quantityPm)();
 
 /***/ }),
 

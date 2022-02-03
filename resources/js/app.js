@@ -3,14 +3,12 @@ import Noty from 'noty'
 import {initAdmin} from './admin'
 import {initStripe} from './stripe'
 import moment from 'moment'
-import {loadStripe} from '@stripe/stripe-js';
+import {quantityPm} from './Quantity'
 
 
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCounter = document.querySelector('#cartCounter')
-let pices = document.querySelectorAll('#pices')
-let totalamount = document.querySelector('#totalamount')
-let price = document.querySelectorAll('#price')
+
 
 
 function updateCart(pizza){
@@ -38,9 +36,6 @@ addToCart.forEach((btn)=>{
         updateCart(pizza);
     })
 })
-
-
-
 
 
 // change order status
@@ -130,8 +125,8 @@ menuclose.addEventListener('click', ()=>{
     humbger.style.display = 'block'
 })
 
-
-
+// Quantity increase and decrease 
+quantityPm();
 
 
 
@@ -140,73 +135,4 @@ menuclose.addEventListener('click', ()=>{
 
  
 
-// //  quantity increase function
-// function plusqty(pizza){
-//     axios.post('/updatecart', pizza).then(function (res){
-//         cartCounter.innerText = res.data.totalQty
-//         // console.log(res);
-//         let dataid = JSON.parse(res.config.data)
-//         pices.forEach((showw)=>{
-//         if(dataid._id == showw.dataset.id){
-//         showw.innerText = `${res.data.Qty}`
-//         totalamount.innerText = `₹ ${res.data.totalPrice}`
-//     } 
-// })
-    
-// price.forEach((price)=>{
-//     if(dataid._id == price.dataset.id){
-//         price.innerText = `₹ ${res.data.price * res.data.Qty}` 
-//     }
-// })
-
-
-        
-//     }).catch(function (err){
-//      console.log('rong');
-//     })
-// }
-
-// //  quantity increase button
-// const carthide = document.querySelectorAll('.carthide')
-// carthide.forEach((btn)=>{
-//     btn.addEventListener('click', (e)=>{
-//         let pizza = JSON.parse(btn.dataset.pizza)
-//         pizza = pizza.item
-//         plusqty(pizza);
-
-//     })
-// })
-// function minusqty(pizza){
-//     axios.post('/minusqty', pizza).then(function (res){
-//         cartCounter.innerText = res.data.totalQty
-//         // console.log(res);
-//         let dataid = JSON.parse(res.config.data)
-//         pices.forEach((showw)=>{
-//             if(dataid._id == showw.dataset.id){
-//                 showw.innerText = `${res.data.Qty}`
-//                 totalamount.innerText = `₹ ${res.data.totalPrice}`
-//             } 
-//         })
-    
-//         price.forEach((price)=>{
-//             if(dataid._id == price.dataset.id){
-//                 price.innerText = `₹ ${res.data.price * res.data.Qty}` 
-//             }
-//         })
- 
-//     }).catch(function (err){
-//      console.log('rong');
-//     }) 
-// }
-
-// // quantity minus button
-// const cartminus = document.querySelectorAll('.cartminus')
-// cartminus.forEach((btn)=>{
-//     btn.addEventListener('click', (e)=>{
-//         let pizza = JSON.parse(btn.dataset.pizza)
-//         pizza = pizza.item
-//         minusqty(pizza);
-
-//     })
-// })
 

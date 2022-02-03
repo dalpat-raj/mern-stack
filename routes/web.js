@@ -25,6 +25,7 @@ function initRoutes(app){
 
 
     app.post('/cart/add/:product', cartController().index)
+    app.post('/cart/minus/:product', cartController().mainus)
     app.get('/cart', cartController().cartbox)
     app.get('/cart/update/:product', cartController().update)
     app.get('/cart/clear', cartController().clear)

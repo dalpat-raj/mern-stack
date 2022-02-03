@@ -29,15 +29,22 @@
                         </div>
                     </div>
                     <div class="md:mr-0 mr-4" >
-                        <a href="/cart/update/<%= product.title %>?action=remove"><i class="fas fa-chevron-left"></i></a>&nbsp
+
+                        <span class="flex-1">
+                            <button data-pizza="<%= JSON.stringify(product)%>" class="cartminus px-3 py-1 rounded-full  font-bold"><i class="fas fa-chevron-left"></i></button>
+                            <span id="pices" data-id="<%= product.title %>" ><%= product.qty %></span>
+                            <button data-pizza="<%= JSON.stringify(product)%>" class="carthide px-3 py-1 rounded-full  font-bold"><i class="fas fa-chevron-right"></i></button>
+                        </span>
+
+                        <!-- <a href="/cart/update/<%= product.title %>?action=remove"><i class="fas fa-chevron-left"></i></a>&nbsp
                         <span><%= product.qty %></span>&nbsp
-                        <a href="/cart/update/<%= product.title %>?action=add"><i class="fas fa-chevron-right"></i></a>
+                        <a href="/cart/update/<%= product.title %>?action=add"><i class="fas fa-chevron-right"></i></a> -->
                     </div>
-                    <div>
+                    <div class="mr-6 md:mr-0">
                         <a href="/cart/update/<%= product.title %>?action=clear"><i class="far fa-trash-alt"></i></a>
                     </div>
                     <div>
-                        <span class="font-bold mr-4 md:mr-0 text-sm md:text-lg">₹ <%= sub %></span>
+                        <span id="price" data-id="<%= product.title %>" class="font-bold  md:mr-0 text-sm md:text-lg">₹ <%= sub %></span>
                     </div>
                 </div>
             </div>
