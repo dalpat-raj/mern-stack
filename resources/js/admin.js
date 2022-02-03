@@ -12,6 +12,7 @@ function initAdmin(socket){
             "X-Requested-With": "XMLHttpRequest"
         }
     }).then(res => {
+        console.log(res.data);
         orders = res.data
         markup = generateMarkup(orders)
         orderTableBody.innerHTML = markup

@@ -276,14 +276,26 @@
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: "lato", sans-serif;
   color: #232323;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-nav li:last-child a {
+.footer {
+  background: #ffab6f;
+  margin-top: auto;
+}
+
+.cartcount {
+  z-index: 200;
   background: #FE5F1E;
 }
-nav li:last-child a:hover {
+.cartcount:hover {
   background: #b23301;
 }
 
@@ -337,7 +349,6 @@ section.cart .amount {
 
 section.login {
   background: #f8f8f8;
-  min-height: calc(100vh - 86px);
 }
 section.login a {
   color: #FE5F1E;
@@ -536,22 +547,6 @@ section.stauts {
     font-size: 12px;
   }
 }
-footer {
-  background: #ffab6f;
-  margin-top: 10vh;
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  transform: translate(-50% -100%);
-}
-
-.dalpat {
-  color: #FE5F1E;
-}
-
 .StripeElement {
   box-sizing: border-box;
   height: 40px;

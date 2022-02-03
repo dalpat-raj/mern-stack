@@ -2,11 +2,25 @@
 @import '~noty/src/noty.scss';
 @import '~noty/src/themes/mint.scss';
 
+
 body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'lato', sans-serif;
-    color: $dark;   
+    color: $dark;  
+    display: flex; 
+    flex-direction: column;
+    height: 100%;
 }
-nav li:last-child a{
+// footer 
+
+.footer{
+    background: rgb(255, 171, 111);
+    margin-top: auto;
+}
+.cartcount{
+    z-index: 200;
     background: $primary;
     &:hover{
         background: $primary-hover;
@@ -50,6 +64,7 @@ section.hero {
     }
 }
 
+
 // cart 
 section.cart{
     background: $secondary;
@@ -61,7 +76,7 @@ section.cart{
 // login 
 section.login{
     background: $secondary;
-    min-height: calc(100vh - 86px);
+    // min-height: calc(100vh - 86px);
     a{
         color: $primary;
         &:hover{
@@ -263,20 +278,6 @@ section.stauts{
 
 }
 
-// footer 
-footer{
-    background: rgb(255, 171, 111);
-    margin-top: 10vh;
-}
-.footer{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transform: translate(-50% -100%);
-}
-.dalpat{
-    color: $primary;
-}
 
 
 // stripe payments 

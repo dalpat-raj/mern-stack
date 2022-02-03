@@ -6,8 +6,8 @@
                 <img src="/img/cart-black.png" alt="">
                 <h1 class="font-bold ml-4 text-2xl">Order summary</h1>
             </div>
-            <div class="flex items-center justify-between my-6 text-right font-bold ">
-                <div class="flex-1 text-center">Item</div>
+            <div class="flex items-center justify-between my-6 text-right text-sm md:font-lg md:font-bold ">
+                <div class="flex-1 md:ml-0 ml-6 text-center">Item</div>
                 <div class="flex-1">Quantity</div>
                 <div class="flex-1">Remove</div>
                 <div class="flex-1">Sub Total</div>
@@ -21,37 +21,37 @@
                 <div class="pizza-list">
                 <div class="flex items-center justify-between my-6">
                     <div class="flex">
-                        <img class="w-24" src="/img/<%= product.image %>" alt="">  
-                        <div class="">
+                        <img class="w-14 md:w-24" src="/img/<%= product.image %>" alt="">  
+                        <div class="text-xs">
                             <h1><%= product.title %></h1>
                             <span><%= product.size %></span>
                             <p>₹<span class="amount"> <%= product.price %></span></p>
                         </div>
                     </div>
-                    <div class="" >
-                        <a href="/cart/update/<%= product.title %>?action=remove"><i class="far fa-minus-square"></i></a>&nbsp
+                    <div class="md:mr-0 mr-4" >
+                        <a href="/cart/update/<%= product.title %>?action=remove"><i class="fas fa-chevron-left"></i></a>&nbsp
                         <span><%= product.qty %></span>&nbsp
-                        <a href="/cart/update/<%= product.title %>?action=add"><i class="far fa-plus-square"></i></a>
+                        <a href="/cart/update/<%= product.title %>?action=add"><i class="fas fa-chevron-right"></i></a>
                     </div>
                     <div>
-                        <a href="/cart/update/<%= product.title %>?action=clear"><i class="far fa-window-close"></i></a>
+                        <a href="/cart/update/<%= product.title %>?action=clear"><i class="far fa-trash-alt"></i></a>
                     </div>
                     <div>
-                        <span class="font-bold text-lg">₹ <%= sub %></span>
+                        <span class="font-bold mr-4 md:mr-0 text-sm md:text-lg">₹ <%= sub %></span>
                     </div>
                 </div>
             </div>
             <% }) %>
             <hr>
             <div class="text-right py-4">
-                <span class="text-lg font-bold">Total Amount:</span>
-                <span id="totalamount" class="amount text-2xl font-bold ml-2">₹ <%= total %> </span>
+                <span class="text-base md:text-lg font-bold">Total Amount:</span>
+                <span id="totalamount" class="amount text-lg md:text-2xl font-bold ml-2">₹ <%= total %> </span>
             </div>
             <% if(user) { %>
             <div class="text-right">
                 <form action="/orders" method="post" id="payment-form">
-                    <div class="relative w-1/3 ml-auto">
-                        <select id="paymentType" name="paymentType" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
+                    <div class="relative w-2/3 md:w-1/3 ml-auto">
+                        <select id="paymentType" name="paymentType" class=" appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline">
                             <option value="cod">Cash On Delivery</option>
                             <option value="card">Pay With Card</option>
                         </select>
@@ -60,10 +60,11 @@
                         </svg>
                         </div>
                     </div>
-                    <div id="card-element" class="w-1/2 ml-auto mt-4">
+                    <div id="card-element" class="w-full md:w-1/2 ml-auto mt-4">
 
                     </div>
-                    <a href="/cart/clear" class="btn-primary px-6 py-2 rounded-full mr-10 text-white font-bold mt-6"> clear cart</a> 
+                    
+                    <a href="/cart/clear" class=" px-6 py-2 rounded-full mr-10 text-gray border border-gray-500 font-bold mt-6"> <i class="far fa-trash-alt mr-4"></i> Cart</a> 
                     <button type="submit" class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6" > Order Now</button> 
                 </form>
             </div> 
