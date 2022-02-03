@@ -1,28 +1,55 @@
 <section class="login flex justify-center ">
-    <div class="md:w-1/4 w-11/12 space-y-8">
+    <div class="lg:w-2/5  space-y-8">
       <form action="/register" method="POST" class="mt-8 space-y-6 border border-gray-400 px-6 py-6 " >
         <% if(messages.error) { %>
         <span class="text-red-500 text-sm"><%= messages.error %></span>
         <% } %>
-        <div class="rounded-md shadow-sm -space-y-px">
-          <div >
-            <label for="name">Name</label>
-            <input id="name" name="name"  type="text" autocomplete="name" required class="mb-8 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="name">
+        <div class="rounded-md shadow-sm ">
+          <div class="flex items-center justify-between">
+            <span>
+            <input id="name" name="fname"  type="text" autocomplete="name" required class="mb-4 appearance-none rounded-none relative  px-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder=" first name">
+            </span>
+            <span class="ml-6">
+            <input id="name" name="lname"  type="text" autocomplete="name" required class="mb-4 appearance-none rounded-none relativenm  px-2  border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="last name">
+            </span>
           </div>
-          <div >
-            <label for="email-address">Email address</label>
-            <input id="email-address" name="email"  type="email" autocomplete="email" required class="mb-8 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+          <div class="flex items-center justify-between">
+            <span>
+            <input id="email-address" name="email"  type="email" autocomplete="email" required class="mb-4 appearance-none rounded-none relative  px-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address">
+            </span>
+            <span class="ml-6">
+            <input id="email-address" name="phone"  type="text" autocomplete="email" required class="mb-4 appearance-none rounded-none relative  px-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Mobile No">
+            </span>
           </div>
-          <div>
-            <label for="password" >Password</label>
-            <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
+          <div class="flex items-center justify-between">
+            <span>
+            <input id="email-address" name="area"  type="text" autocomplete="email" required class="mb-4 appearance-none rounded-none relative px-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Address (Area And Street) ">
+           </span>
+           <span class="ml-6">
+             <input id="email-address" name="pin"  type="text" autocomplete="email" required class="mb-4 appearance-none rounded-none relative px-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Pin Code">
+           </span>
           </div>
-          <a class="font-medium text-indigo-600 hover:text-indigo-500">please choose a account</a>
+          <div class="flex items-center justify-between">
+            <span>
+              <input id="email-address" name="city"  type="text" autocomplete="email" required class="mb-4 appearance-none rounded-none relative px-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="City/District/Town">
+            </span>
+            <span class="ml-6">
+              <input id="email-address" name="state"  type="text" autocomplete="email" required class="mb-4 appearance-none rounded-none relative px-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="state">
+            </span>
+          </div>
+          <div class="flex items-center justify-between"> 
+            <span>
+            <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative px-2 mb-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm w-full" placeholder="Password">
+            </span>
+            <span class="ml-6">
+            <input id="password" name="cpassword" type="password" autocomplete="current-password" required class="appearance-none rounded-none mb-2 relative px-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="confirm Password">
+          </span>
         </div>
-  
+        <a class="font-medium text-indigo-600 hover:text-indigo-500">please choose a account</a>
+       </div>
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <button type="submit"  class="inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-2" >Register</button type="submit">
+            <button type="submit"  class="inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-2" >Register</button>
           </div>
   
           <div class="text-sm">

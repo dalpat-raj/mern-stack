@@ -9,13 +9,29 @@
         <table class="w-full table-auto bg-white">
             <thead>
                 <tr>
-                    <th class="px-4 py-2 text-left">Orders</th>
-                    <th class="px-4 py-2 text-left">Address</th>
-                    <th class="px-4 py-2 text-left">Phone</th>
+                    <th class="px-4 py-2 text-left">Orders Id</th>
+                    <th class="px-4 py-2 text-left">Item</th>
+                    <th class="px-4 py-2 text-left">Payment</th>
                     <th class="px-4 py-2 text-left">Time</th>
                 </tr>
             </thead>
             <tbody>
+                <%
+                function renderItems(items){
+                    let parsedItems = Object.values(items)
+                    return parsedItems.map((menuItem) => {
+                        return `${ menuItem.title} - ${ menuItem.qty } pcs `
+                    }).join('')
+                }
+                %>
+                <%
+                function renderImage(items){
+                    let parsedItems = Object.values(items)
+                    return parsedItems.map((menuItem) => {
+                        return ` ${menuItem.image}`
+                    }).join('')
+                }
+                %>
                 <% if(orders.length) { %>
                 <% orders.forEach((order) => { %>
                         <tr>
@@ -23,10 +39,10 @@
                                 <a class="link" href="/customer/orders/<%= order._id %>"><%= order._id %></a> 
                             </td>
                             <td class="border px-4 py-2">
-                                <%= order.address %>
+                                 <p><%= renderItems(order.items) %></p>  
                             </td>
                             <td class="border px-4 py-2">
-                                <%= order.phone %>
+                                <%= order.paymentType %>
                             </td>
                             <td class="border px-4 py-2">
                                 <%= moment(order.createdAt).format('hh:mm A') %>

@@ -9,6 +9,7 @@ const statusController = require('../app/http/controllers/admin/statusController
 const guest = require('../app/http/middleware/guest')
 const auth= require('../app/http/middleware/auth')
 const admin= require('../app/http/middleware/admin')
+const { application } = require('express')
 
 
 function initRoutes(app){
@@ -20,13 +21,15 @@ function initRoutes(app){
     
     app.get('/register', guest, authController().register)
     app.post('/register', authController().postRegister)
-    
     app.post('/logout', authController().logout)
 
-    app.get('/cart', cartController().index) 
-    app.post('/updatecart', cartController().update)
-    app.post('/minusqty', cartController().minusupdate)
-    
+
+    app.post('/cart/add/:product', cartController().index)
+    app.get('/cart', cartController().cartbox)
+    app.get('/cart/update/:product', cartController().update)
+    app.get('/cart/clear', cartController().clear)
+
+
     
     // customers routes 
     app.post('/orders', auth, orderController().store)
@@ -34,9 +37,12 @@ function initRoutes(app){
     app.get('/customer/orders/:id', auth, orderController().showw)
 
 
+
     // admin routes 
     app.get('/admin/orders', admin, adminOrderController().index)
     app.post('/admin/order/status', admin, statusController().update)
+
+
 
 
 }

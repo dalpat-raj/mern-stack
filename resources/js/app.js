@@ -1,7 +1,10 @@
 import axios from 'axios'
 import Noty from 'noty'
 import {initAdmin} from './admin'
+import {initStripe} from './stripe'
 import moment from 'moment'
+import {loadStripe} from '@stripe/stripe-js';
+
 
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCounter = document.querySelector('#cartCounter')
@@ -11,7 +14,7 @@ let price = document.querySelectorAll('#price')
 
 
 function updateCart(pizza){
-    axios.post('/updatecart', pizza).then(function (res){
+    axios.post(`/cart/add/${pizza.slug}`, pizza).then(function (res){
         cartCounter.innerText = res.data.totalQty
         new Noty({
             type: 'success',
@@ -36,84 +39,7 @@ addToCart.forEach((btn)=>{
     })
 })
 
-//  quantity increase function
-function plusqty(pizza){
-    axios.post('/updatecart', pizza).then(function (res){
-        cartCounter.innerText = res.data.totalQty
-        // console.log(res);
-        let dataid = JSON.parse(res.config.data)
-        pices.forEach((showw)=>{
-        if(dataid._id == showw.dataset.id){
-        showw.innerText = `${res.data.Qty}`
-        totalamount.innerText = `₹ ${res.data.totalPrice}`
-    } 
-})
-    
-price.forEach((price)=>{
-    if(dataid._id == price.dataset.id){
-        price.innerText = `₹ ${res.data.price * res.data.Qty}` 
-    }
-})
 
-
-        
-    }).catch(function (err){
-     console.log('rong');
-    })
-}
-
-//  quantity increase button
-const carthide = document.querySelectorAll('.carthide')
-carthide.forEach((btn)=>{
-    btn.addEventListener('click', (e)=>{
-        let pizza = JSON.parse(btn.dataset.pizza)
-        pizza = pizza.item
-        plusqty(pizza);
-
-    })
-})
-function minusqty(pizza){
-    axios.post('/minusqty', pizza).then(function (res){
-        cartCounter.innerText = res.data.totalQty
-        // console.log(res);
-        let dataid = JSON.parse(res.config.data)
-        pices.forEach((showw)=>{
-            if(dataid._id == showw.dataset.id){
-                showw.innerText = `${res.data.Qty}`
-                totalamount.innerText = `₹ ${res.data.totalPrice}`
-            } 
-        })
-    
-        price.forEach((price)=>{
-            if(dataid._id == price.dataset.id){
-                price.innerText = `₹ ${res.data.price * res.data.Qty}` 
-            }
-        })
- 
-    }).catch(function (err){
-     console.log('rong');
-    }) 
-}
-
-// quantity minus button
-const cartminus = document.querySelectorAll('.cartminus')
-cartminus.forEach((btn)=>{
-    btn.addEventListener('click', (e)=>{
-        let pizza = JSON.parse(btn.dataset.pizza)
-        pizza = pizza.item
-        minusqty(pizza);
-
-    })
-})
-
-
-// remove alert messages after x second
-const alerMsg = document.querySelector('#success-alert')
-if(alerMsg){
-    setTimeout(() => {
-        alerMsg.remove()
-    }, 2000);
-}
 
 
 
@@ -148,7 +74,7 @@ function updateStatus(order) {
 }
 
 updateStatus(order)
-
+initStripe()
 
 // socket.io 
 let socket = io()
@@ -179,6 +105,13 @@ socket.on('orderUpdated', (data) => {
 })
 
 
+// remove alert messages after x second
+const alerMsg = document.querySelector('#success-alert')
+if(alerMsg){
+    setTimeout(() => {
+        alerMsg.remove()
+    }, 2000);
+}
 
 
 // toggle
@@ -196,4 +129,84 @@ menuclose.addEventListener('click', ()=>{
     menuclose.style.display = 'none'
     humbger.style.display = 'block'
 })
+
+
+
+
+
+
+
+
+
+ 
+
+// //  quantity increase function
+// function plusqty(pizza){
+//     axios.post('/updatecart', pizza).then(function (res){
+//         cartCounter.innerText = res.data.totalQty
+//         // console.log(res);
+//         let dataid = JSON.parse(res.config.data)
+//         pices.forEach((showw)=>{
+//         if(dataid._id == showw.dataset.id){
+//         showw.innerText = `${res.data.Qty}`
+//         totalamount.innerText = `₹ ${res.data.totalPrice}`
+//     } 
+// })
+    
+// price.forEach((price)=>{
+//     if(dataid._id == price.dataset.id){
+//         price.innerText = `₹ ${res.data.price * res.data.Qty}` 
+//     }
+// })
+
+
+        
+//     }).catch(function (err){
+//      console.log('rong');
+//     })
+// }
+
+// //  quantity increase button
+// const carthide = document.querySelectorAll('.carthide')
+// carthide.forEach((btn)=>{
+//     btn.addEventListener('click', (e)=>{
+//         let pizza = JSON.parse(btn.dataset.pizza)
+//         pizza = pizza.item
+//         plusqty(pizza);
+
+//     })
+// })
+// function minusqty(pizza){
+//     axios.post('/minusqty', pizza).then(function (res){
+//         cartCounter.innerText = res.data.totalQty
+//         // console.log(res);
+//         let dataid = JSON.parse(res.config.data)
+//         pices.forEach((showw)=>{
+//             if(dataid._id == showw.dataset.id){
+//                 showw.innerText = `${res.data.Qty}`
+//                 totalamount.innerText = `₹ ${res.data.totalPrice}`
+//             } 
+//         })
+    
+//         price.forEach((price)=>{
+//             if(dataid._id == price.dataset.id){
+//                 price.innerText = `₹ ${res.data.price * res.data.Qty}` 
+//             }
+//         })
+ 
+//     }).catch(function (err){
+//      console.log('rong');
+//     }) 
+// }
+
+// // quantity minus button
+// const cartminus = document.querySelectorAll('.cartminus')
+// cartminus.forEach((btn)=>{
+//     btn.addEventListener('click', (e)=>{
+//         let pizza = JSON.parse(btn.dataset.pizza)
+//         pizza = pizza.item
+//         minusqty(pizza);
+
+//     })
+// })
 

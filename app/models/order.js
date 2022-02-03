@@ -5,10 +5,14 @@ const orderSchema = new mongoose.Schema({
                 ref: 'User',
                 required: true
             },
-    items: { type: Object, required: true},
-    phone: { type: String, required: true},
-    address: { type: String, required: true},
+    name: { type: String, required: true},
+    phone: { type: Number, required: true},
+    area: { type: String, required: true},
+    city: { type: String, required: true},
+    pin: { type: Number, required: true},
+    items: { type : Array , "default" : [] },
     paymentType: { type: String, default: 'COD'},
+    paymentStatus: {type: Boolean, default: false},
     status: { type: String, default: 'order_placed'},
 },{timestamps: true})
 

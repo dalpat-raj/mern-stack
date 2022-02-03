@@ -1,35 +1,60 @@
 const Order = require('../../../models/order')
 const moment = require('moment')
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+
 
 function orderController(){
     return{
         store(req, res){
-            // validate request
-            const { phone, address} = req.body
-            if(!phone || !address){
-                req.flash('error', 'All fieslds are requirees')
-                return res.redirect('/cart')
-            }
 
+            var { paymentType, stripeToken } = req.body;
+            var totalPrice = 0; 
+            let cart = req.session.cart
+            for(let data of cart){
+                totalPrice += +data.price * data.qty
+            }
             const order = new Order({
                 customerId: req.user._id,
-                items: req.session.cart.items,
-                phone: phone,
-                address: address
+                name: req.user.firstName,
+                phone: req.user.phone,
+                area: req.user.area,
+                city: req.user.city,
+                pin: req.user.pin,
+                items: req.session.cart
             })
             order.save().then(result => {
-                Order.populate(result, { path: 'customerId' }, (err, placedOrder)=>{
-                    req.flash('success', 'Order placed Successfully')
-                    delete req.session.cart
-                    //emit 
-                    const eventEmitter = req.app.get('eventEmitter')
-                    eventEmitter.emit('orderPlaced', placedOrder)
-                    return res.redirect('/customer/orders')
-                })
+                Order.populate(result, { path: 'customerId' },async (err, placedOrder)=>{
+                    // stripe payment 
+                    if(paymentType === 'card'){
+                        stripe.charges.create({
+                            amount: totalPrice * 100,
+                            source: stripeToken,
+                            currency: 'inr'
+                          }).then((ress)=>{
+                              placedOrder.paymentStatus = true;
+                              placedOrder.paymentType = paymentType
+                              placedOrder.save().then((ord)=>{
+                                //emit  
+                                const eventEmitter = req.app.get('eventEmitter')
+                                eventEmitter.emit('orderPlaced', ord)
+                                delete req.session.cart
+                                return res.json({ massage: 'payment successful order placed'})
+                            }).catch((err)=>{
+                                console.log(err);
+                            })
 
+                        }).catch((err)=>{
+                            delete req.session.cart
+                            return res.json({ massage: 'payment failed, you pay deleviry time '}) 
+                        })
+                    }else{
+                        delete req.session.cart
+                        return res.json({ massage: 'order save cod '})
+                    }
+                })
             }).catch(err => {
-                req.flash('error', 'Something went wrong')
-                return res.redirect('/cart')
+                return res.status(500).json({ massage: 'something went wrong '}) 
+               
             })
         },
         async index(req, res){
@@ -46,7 +71,7 @@ function orderController(){
                 return res.render('customers/sorder', { order: order })
             }
             return res.redirect('/')
-        }    
+        }, 
     }
 }
 

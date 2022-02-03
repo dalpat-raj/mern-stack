@@ -541,6 +541,36 @@ footer {
   margin-top: 10vh;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(-50% -100%);
+}
+
 .dalpat {
   color: #FE5F1E;
+}
+
+.StripeElement {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid #7c7c7c;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: -1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }

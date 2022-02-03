@@ -1,56 +1,85 @@
 
-
 function cartController() {
+  return {
+    index(req, res) {
+      let slug = req.params.product;
+        if (typeof req.session.cart == "undefined") {
+          req.session.cart = [];
+          req.session.cart.push({
+            title: slug,
+            qty: 1,
+            price: parseFloat(req.body.price).toFixed(2),
+            image: req.body.image,
+            size: req.body.size,
+          });
+        } else {
+          let cart = req.session.cart;
+          let newItem = true;
 
-    return {
-        index(req, res) {
-            res.render('customers/cart')
-        },
-        update(req, res){
-            // for the first time creating cart and adding basic object structure
-            if(!req.session.cart){
-                req.session.cart = {
-                    items: {},
-                    totalQty: 0,
-                    totalPrice: 0
-                }
+          for (let i = 0; i < cart.length; i++) {
+            if (cart[i].title == slug) {
+              cart[i].qty++;
+              newItem = false;
+              break;
             }
-            let cart = req.session.cart
-              // check if item does not exist in cart 
-              if(!cart.items[req.body._id]){
-                  cart.items[req.body._id] = {
-                      item: req.body,
-                      qty: 1
-                    }
-                    cart.totalQty = cart.totalQty + 1;
-                    cart.totalPrice = cart.totalPrice + req.body.price     
-                }else if(cart.items[req.body._id].qty < 10){
-                    cart.items[req.body._id].qty = cart.items[req.body._id].qty + 1
-                    cart.totalQty = cart.totalQty + 1
-                    cart.totalPrice = cart.totalPrice + req.body.price
+          }
+
+          if (newItem) {
+            cart.push({
+                title: slug,
+                qty: 1,
+                price: parseFloat(req.body.price).toFixed(2),
+                image: req.body.image,
+                size: req.body.size,
+              });
+          }
+        }
+        return res.json({totalQty: req.session.cart.length })
+
+    },
+    cartbox(req, res) {
+      res.render("customers/cart", {
+        title: "cart",
+        cart: req.session.cart,
+      });
+    },
+    update(req, res){
+        const slug = req.params.product
+        const cart = req.session.cart
+        const action = req.query.action
+
+        for (let i = 0; i < cart.length; i++) {
+            if( cart[i].title == slug ){
+                switch (action) {
+                    case 'add':
+                        if(cart[i].qty < 9) cart[i].qty++;
+                        break;
+                    case 'remove':
+                        if(cart[i].qty > 1) cart[i].qty--;
+                        break;
+                    case 'clear':
+                        cart.splice(i, 1);
+                        if(cart.length == 0) delete req.session.cart;
+                        break;
+                    
+                    default:
+                        console.log('update problem');
+                        break;
                 }
-           
-                return res.json({totalQty: req.session.cart.totalQty, Qty: req.session.cart.items[req.body._id].qty, totalPrice: req.session.cart.totalPrice, price: req.body.price })
-       
-        },
-        minusupdate(req, res){
-            let cart = req.session.cart  
-                if(cart.items[req.body._id].qty > 1){
-                    cart.items[req.body._id].qty = cart.items[req.body._id].qty - 1
-                    cart.totalQty = cart.totalQty - 1
-                    cart.totalPrice = cart.totalPrice - req.body.price
-           
-                return res.json({totalQty: req.session.cart.totalQty, Qty: req.session.cart.items[req.body._id].qty, totalPrice: req.session.cart.totalPrice, price: req.body.price })
-                }else{
-                    console.log('minimum 1 quantity');
-                }
-        },
-     
-      
+                break;
+            }    
+        }
+        res.redirect('/cart')
+    },
+    clear(req, res){
+        req.session.destroy()
+        res.redirect('/cart')
     }
+
+
+
+
+  };
 }
 
-
-module.exports = cartController
-
-
+module.exports = cartController;

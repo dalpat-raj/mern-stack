@@ -41,20 +41,27 @@ function authController() {
             res.render('auth/register')
         },
         async postRegister(req, res) {
-            const {name, email, password} = req.body 
+            const {fname, lname, email, phone, area, pin, city, state, password, cpassword} = req.body 
             // validate request
-            if(!name || !email || !password){
+            if( !fname || !lname || !email || !phone || !area || !pin || !city || !state || !password || !cpassword ){
                 req.flash('error', 'All fields are required')
-                req.flash('name', name)
+                req.flash('name', fname)
                 req.flash('email', email)
                 return res.redirect('/register')
             }
-            
-            // check if email exists
+            if(password !== cpassword){
+                req.flash('error', 'password not match')
+                return res.redirect('/register')
+            }
+            if(city !== 'sirohi' && city !== 'Sirohi' && city !== 'SIROHI'){
+                req.flash('error', 'only sirohi city')
+                return res.redirect('/register')
+            }
+            // // check if email exists
             User.exists({email: email}, (err, result)=> {
                 if(result){
                     req.flash('error', 'Email already taken')
-                    req.flash('name', name)
+                    req.flash('name', fname)
                     req.flash('email', email)
                     return res.redirect('/register')
                 }
@@ -64,8 +71,14 @@ function authController() {
 
             // create user 
             const user = new User({
-                name: name,
+                firstName: fname,
+                lastName: lname,
                 email: email,
+                phone: phone,
+                area: area,
+                pin: pin,
+                city: city,
+                state: state,
                 password: hashedPassword
             })
             user.save().then((user)=>{

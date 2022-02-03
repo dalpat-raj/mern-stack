@@ -26,6 +26,7 @@
                         <span class="sizee py-0.5 px-2 md:py-1 md:px-4 rounded-full uppercase text-sm md:text-xs"><%= pizza.size%></span>
                         <div class="flex items-center justify-around mt-6">
                             <span class="font-bold md:text-lg  text-sm">₹ <%= pizza.price%></span>
+                            <!-- <a href="/cart/add/<%= pizza.slug %>">add to cart</a> -->
                             <button data-pizza="<%= JSON.stringify(pizza)%>" class="add-to-cart py-0.5 md:py-1 md:px-6 px-2 rounded-full flex items-center">
                                 <span>+</span>
                                 <span class="md:ml-4 ml-2">Add</span>

@@ -13,8 +13,8 @@ const passport = require('passport')
 const Emitter = require('events')
 
 // database connection 
-// const url = 'mongodb://localhost/pizza';   // local mongodb compass
-const url = process.env.MY_URL
+const url = 'mongodb://localhost/pizza';   // local mongodb compass
+// const url = process.env.MY_URL
 mongoose.connect(url).then(()=>{
     console.log('DataBase Connection succesfull');
 }).catch((err)=>{
@@ -60,8 +60,8 @@ app.use(express.urlencoded({extended: false}))
 
 
 // global middleware 
-app.use((req, res, next)=>{
-    res.locals.session = req.session
+app.get('*', function(req, res, next){
+    res.locals.cart = req.session.cart
     res.locals.user = req.user
     next()
 })
